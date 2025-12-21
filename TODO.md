@@ -1,19 +1,21 @@
-# Performance Optimization Tasks
+# TODO: Add Understandable Comments to All Code
 
-## Lazy Loading Implementation
-- [x] Implement lazy loading for route components in App.tsx using React.lazy and Suspense
-
-## Memoization Implementation
-- [ ] Memoize RoomList component and add useCallback for event handlers
-- [ ] Memoize EditRoom component
-- [ ] Memoize CreateRoom component
-- [ ] Memoize Login component
-- [ ] Memoize BookRoom component
-- [ ] Memoize Rooms component
-- [ ] Memoize ProtectedRoute component
-- [ ] Memoize AppSnackbar component
-
-## Testing and Verification
-- [ ] Test the app to ensure lazy loading works correctly
-- [ ] Run linting and build to check for any issues
-- [ ] Verify performance improvements with React DevTools Profiler
+- [x] Read and add comments to App.tsx
+- [x] Read and add comments to main.tsx
+- [x] Read and add comments to api/axios.tsx
+- [x] Read and add comments to app/snackbarSlice.tsx
+- [x] Read and add comments to app/store.tsx
+- [x] Read and add comments to auth/authSlice.tsx
+- [ ] Read and add comments to auth/ProtectedRoute.tsx
+- [ ] Read and add comments to Components/AppSnackbar.tsx
+- [ ] Read and add comments to Components/ErrorBoundary.tsx
+- [ ] Read and add comments to Components/Footer.tsx
+- [ ] Read and add comments to Components/Header.tsx
+- [ ] Read and add comments to pages/BookRoom.tsx
+- [ ] Read and add comments to pages/Login.tsx
+- [ ] Read and add comments to pages/Rooms.tsx
+- [ ] Read and add comments to pages/admin/CreateRoom.tsx
+- [ ] Read and add comments to pages/admin/EditRoom.tsx
+- [ ] Read and add comments to pages/admin/RoomList.tsx
+- [ ] Read and add comments to validation/schemas.tsx
+- [ ] Run development server to ensure app still works correctly
