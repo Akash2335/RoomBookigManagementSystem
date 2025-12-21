@@ -1,0 +1,73 @@
+## 1️⃣ Login (Admin)
+
+**Frontend**
+
+http://localhost:5173/login
+
+➡️ Login using **Admin credentials**
+
+---
+## 2️⃣ Admin – Room Management
+
+### 🔹 Open Admin Panel
+
+http://localhost:5173/admin/rooms
+
+✔ View all rooms
+✔ Admin-only access
+
+---
+
+### 🔹 Create Room
+http://localhost:5173/admin/rooms/create
+
+
+✔ Add new room
+✔ Capacity validation (1–100)
+
+---
+
+### 🔹 Edit Room
+http://localhost:5173/admin/rooms/edit/1
+
+
+✔ Replace `1` with actual room ID
+✔ Update room name / capacity
+
+---
+
+### 🔹 Delete Room (Backend API)
+
+**API Endpoint**
+DELETE https://localhost:7018/api/rooms/2
+
+
+✔ Requires **Admin JWT token**
+✔ Can be tested via **Swagger / Postman**
+✔ Replace `2` with room ID
+
+---
+
+## 3️⃣ Logout
+
+✔ Clear token (if logout implemented)
+✔ Or refresh browser / clear localStorage
+
+---
+
+## 4️⃣ Login (User)
+
+**Frontend**
+http://localhost:5173/login
+
+
+➡️ Login using **User credentials**
+
+---
+
+## 5️⃣ User – Book Room
+
+http://localhost:5173/book
+
+✔ User-only access
+✔ Booking conflict & capacity validation
