@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import api from "../api/axios";
 import { useDispatch } from "react-redux";
 import { showSnackbar } from "../app/snackbarSlice";
@@ -47,7 +48,13 @@ export default function Rooms() {
           {rooms.map((r) => (
             <div key={r.id} className="bg-white p-6 rounded-lg shadow-md">
               <h3 className="text-xl font-semibold mb-2">{r.roomName}</h3>
-              <p className="text-gray-600">Capacity: {r.capacity}</p>
+              <p className="text-gray-600 mb-4">Capacity: {r.capacity}</p>
+              <Link
+                to={`/book?roomId=${r.id}`}
+                className="inline-block bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-colors"
+              >
+                Book Now
+              </Link>
             </div>
           ))}
         </div>

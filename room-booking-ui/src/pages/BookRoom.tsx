@@ -1,4 +1,5 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
+import { useSearchParams } from "react-router-dom";
 import { bookingSchema } from "../validation/schemas";
 import api from "../api/axios";
 import { useDispatch } from "react-redux";
@@ -6,6 +7,8 @@ import { showSnackbar } from "../app/snackbarSlice";
 
 export default function BookRoom() {
   const dispatch = useDispatch();
+  const [searchParams] = useSearchParams();
+  const roomIdFromUrl = searchParams.get("roomId") || "";
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 py-8">
@@ -14,7 +17,7 @@ export default function BookRoom() {
 
         <Formik
           initialValues={{
-            roomId: "",
+            roomId: roomIdFromUrl,
             startDate: "",
             endDate: "",
             numberOfPeople: 1,
