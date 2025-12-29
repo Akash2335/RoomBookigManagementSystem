@@ -3,6 +3,8 @@ import api from "../../api/axios";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { showSnackbar } from "../../app/snackbarSlice";
+import { Helmet } from "react-helmet-async";
+import { useNavigate } from "react-router-dom";
 
 interface Room {
   id: number;
@@ -15,7 +17,7 @@ const RoomList = () => {
   const [loading, setLoading] = useState(true);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [roomToDelete, setRoomToDelete] = useState<Room | null>(null);
-
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   // ---------- Load rooms ----------
@@ -83,77 +85,90 @@ const RoomList = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 py-8">
-      <div className="max-w-4xl mx-auto px-4">
-        <h2 className="text-3xl font-bold mb-6 text-center">Room List</h2>
-
-        <div className="mb-6 text-center">
-          <Link
-            to="/admin/rooms/create"
-            className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
+    <>
+      <Helmet>
+        <title>Room|Room Bokking System</title>
+        <link rel="icon" href="/admin-logo.png" />
+        <meta name="description" content="Admin room management page" />
+      </Helmet>
+      <div className="min-h-screen bg-gray-100 py-8">
+        <div className="max-w-4xl mx-auto px-4">
+          <button
+            onClick={() => navigate(-1)}
+            className="mb-4 bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-600"
           >
-            Create Room
-          </Link>
-        </div>
+            Back
+          </button>
+          <h2 className="text-3xl font-bold mb-6 text-center">Room List</h2>
 
-        {rooms.length === 0 && (
-          <p className="text-center text-gray-600">No rooms available</p>
-        )}
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {rooms.map((room) => (
-            <div key={room.id} className="bg-white p-6 rounded-lg shadow-md">
-              <h3 className="text-xl font-semibold mb-2">{room.roomName}</h3>
-              <p className="text-gray-600 mb-4">Capacity: {room.capacity}</p>
-
-              <div className="flex space-x-2">
-                <Link
-                  to={`/admin/rooms/edit/${room.id}`}
-                  className="bg-green-500 text-white py-1 px-3 rounded-md hover:bg-green-600"
-                >
-                  Edit
-                </Link>
-
-                <button
-                  onClick={() => openDeleteModal(room)}
-                  className="bg-red-500 text-white py-1 px-3 rounded-md hover:bg-red-600"
-                >
-                  Delete
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* ---------- Delete Modal ---------- */}
-        {deleteModalOpen && roomToDelete && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-            <div className="bg-white p-6 rounded-lg shadow-lg max-w-md w-full">
-              <h3 className="text-lg font-semibold mb-4">Confirm Deletion</h3>
-              <p className="mb-4">
-                Are you sure you want to delete{" "}
-                <strong>{roomToDelete.roomName}</strong>?
-              </p>
-
-              <div className="flex justify-end space-x-2">
-                <button
-                  onClick={closeDeleteModal}
-                  className="px-4 py-2 bg-gray-300 rounded-md"
-                >
-                  Cancel
-                </button>
-                <button
-                  onClick={confirmDelete}
-                  className="px-4 py-2 bg-red-500 text-white rounded-md"
-                >
-                  Delete
-                </button>
-              </div>
-            </div>
+          <div className="mb-6 text-center">
+            <Link
+              to="/admin/rooms/create"
+              className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
+            >
+              Create Room
+            </Link>
           </div>
-        )}
+
+          {rooms.length === 0 && (
+            <p className="text-center text-gray-600">No rooms available</p>
+          )}
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {rooms.map((room) => (
+              <div key={room.id} className="bg-white p-6 rounded-lg shadow-md">
+                <h3 className="text-xl font-semibold mb-2">{room.roomName}</h3>
+                <p className="text-gray-600 mb-4">Capacity: {room.capacity}</p>
+
+                <div className="flex space-x-2">
+                  <Link
+                    to={`/admin/rooms/edit/${room.id}`}
+                    className="bg-green-500 text-white py-1 px-3 rounded-md hover:bg-green-600"
+                  >
+                    Edit
+                  </Link>
+
+                  <button
+                    onClick={() => openDeleteModal(room)}
+                    className="bg-red-500 text-white py-1 px-3 rounded-md hover:bg-red-600"
+                  >
+                    Delete
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* ---------- Delete Modal ---------- */}
+          {deleteModalOpen && roomToDelete && (
+            <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+              <div className="bg-white p-6 rounded-lg shadow-lg max-w-md w-full">
+                <h3 className="text-lg font-semibold mb-4">Confirm Deletion</h3>
+                <p className="mb-4">
+                  Are you sure you want to delete{" "}
+                  <strong>{roomToDelete.roomName}</strong>?
+                </p>
+
+                <div className="flex justify-end space-x-2">
+                  <button
+                    onClick={closeDeleteModal}
+                    className="px-4 py-2 bg-gray-300 rounded-md"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    onClick={confirmDelete}
+                    className="px-4 py-2 bg-red-500 text-white rounded-md"
+                  >
+                    Delete
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import api from "../api/axios";
 import { useDispatch } from "react-redux";
 import { showSnackbar } from "../app/snackbarSlice";
+import { useAppSelector } from "../app/store";
 
 interface Room {
   id: number;
@@ -14,6 +15,9 @@ export default function Rooms() {
   const [rooms, setRooms] = useState<Room[]>([]);
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const token = useAppSelector((state) => state.auth.accessToken);
+  const role = useAppSelector((state) => state.auth.role);
 
   const loadRooms = async () => {
     try {
@@ -35,14 +39,27 @@ export default function Rooms() {
     loadRooms();
   }, []);
 
-  if (loading) return <div className="min-h-screen flex items-center justify-center"><p className="text-lg">Loading rooms...</p></div>;
+  if (loading)
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <p className="text-lg">Loading rooms...</p>
+      </div>
+    );
 
   return (
     <div className="min-h-screen bg-gray-100 py-8">
       <div className="max-w-4xl mx-auto px-4">
+        <button
+          onClick={() => navigate(-1)}
+          className="mb-4 bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-600"
+        >
+          Back
+        </button>
         <h2 className="text-3xl font-bold mb-6 text-center">Available Rooms</h2>
 
-        {rooms.length === 0 && <p className="text-center text-gray-500">No rooms available</p>}
+        {rooms.length === 0 && (
+          <p className="text-center text-gray-500">No rooms available</p>
+        )}
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {rooms.map((r) => (

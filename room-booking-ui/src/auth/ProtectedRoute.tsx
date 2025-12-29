@@ -12,12 +12,12 @@ export default function ProtectedRoute({
   children,
   role,
 }: ProtectedRouteProps) {
-  const { token, role: userRole } = useAppSelector(
+  const { accessToken, role: userRole } = useAppSelector(
     (state) => state.auth as AuthState
   );
 
   // 1️⃣ Not logged in
-  if (!token) {
+  if (!accessToken) {
     return <Navigate to="/login" replace />;
   }
 

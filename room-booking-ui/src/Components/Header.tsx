@@ -6,7 +6,8 @@ import { logout } from "../auth/authSlice";
 const Header: React.FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const token = useAppSelector((state) => state.auth.token);
+  const token = useAppSelector((state) => state.auth.accessToken);
+  const role = useAppSelector((state) => state.auth.role);
 
   const handleLogout = () => {
     dispatch(logout());
@@ -29,14 +30,29 @@ const Header: React.FC = () => {
               </Link>
             </li>
             {token ? (
-              <li>
-                <button
-                  onClick={handleLogout}
-                  className="hover:text-blue-200 bg-transparent border-none cursor-pointer"
-                >
-                  Logout
-                </button>
-              </li>
+              <>
+                {role === "Admin" ? (
+                  <li>
+                    <Link to="/admin/dashboard" className="hover:text-blue-200">
+                      Admin Dashboard
+                    </Link>
+                  </li>
+                ) : (
+                  <li>
+                    <Link to="/user/dashboard" className="hover:text-blue-200">
+                      User Dashboard
+                    </Link>
+                  </li>
+                )}
+                <li>
+                  <button
+                    onClick={handleLogout}
+                    className="hover:text-blue-200 bg-transparent border-none cursor-pointer"
+                  >
+                    Logout
+                  </button>
+                </li>
+              </>
             ) : (
               <li>
                 <Link to="/login" className="hover:text-blue-200">

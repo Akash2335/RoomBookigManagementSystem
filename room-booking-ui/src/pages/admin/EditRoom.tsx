@@ -49,6 +49,12 @@ const EditRoom = () => {
   return (
     <div className="flex justify-center mt-10">
       <div className="bg-white p-6 rounded shadow w-full max-w-md">
+        <button
+          onClick={() => navigate(-1)}
+          className="mb-4 bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-600"
+        >
+          Back
+        </button>
         <h2 className="text-xl font-semibold mb-4 text-center">Edit Room</h2>
 
         <Formik

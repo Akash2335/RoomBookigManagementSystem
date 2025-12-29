@@ -14,7 +14,7 @@ export default function AppSnackbar() {
     <Snackbar
       open={open}
       autoHideDuration={3000}
-      onClose={(event, reason) => dispatch(hideSnackbar())}
+      onClose={(_event, _reason) => dispatch(hideSnackbar())}
       anchorOrigin={{ vertical: "top", horizontal: "right" }}
     >
       <Alert

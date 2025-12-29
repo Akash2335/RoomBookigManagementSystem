@@ -1,17 +1,20 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import { Provider } from 'react-redux'
-import { store } from './app/store'
-import './index.css'
-import App from './App.tsx'
-import ErrorBoundary from './Components/ErrorBoundary'
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import { HelmetProvider } from "react-helmet-async";
+import { Provider } from "react-redux";
+import { store } from "./app/store";
+import "./index.css";
+import App from "./App.tsx";
+import ErrorBoundary from "./Components/ErrorBoundary";
 
-createRoot(document.getElementById('root')!).render(
+createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <ErrorBoundary>
       <Provider store={store}>
-        <App />
+        <HelmetProvider>
+          <App />
+        </HelmetProvider>
       </Provider>
     </ErrorBoundary>
-  </StrictMode>,
-)
+  </StrictMode>
+);

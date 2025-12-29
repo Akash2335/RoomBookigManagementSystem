@@ -20,9 +20,15 @@ import { CircularProgress } from "@mui/material";
 const Login = lazy(() => import("./pages/Login")); // User login page
 const Rooms = lazy(() => import("./pages/Rooms")); // Public room listing
 const BookRoom = lazy(() => import("./pages/BookRoom")); // Room booking page
+const UserDashboard = lazy(() => import("./pages/UserDashboard")); // User dashboard
 const RoomList = lazy(() => import("./pages/admin/RoomList")); // Admin: list rooms
 const CreateRoom = lazy(() => import("./pages/admin/CreateRoom")); // Admin: create room
 const EditRoom = lazy(() => import("./pages/admin/EditRoom")); // Admin: edit room
+const CreateUser = lazy(() => import("./pages/admin/CreateUser")); // Admin: create user
+const UserList = lazy(() => import("./pages/admin/UserList")); // Admin: list users
+const BookingList = lazy(() => import("./pages/admin/BookingList")); // Admin: list bookings
+const AdminDashboard = lazy(() => import("./pages/admin/AdminDashboard")); // Admin dashboard
+const ForgotPassword = lazy(() => import("./pages/ForgotPassword")); // Forgot password page
 
 // ===============================
 // NON-lazy components
@@ -63,13 +69,29 @@ export default function App() {
                    ======================= */}
                 <Route path="/" element={<Rooms />} />
                 <Route path="/login" element={<Login />} />
+                <Route path="/forgot-password" element={<ForgotPassword />} />
 
                 {/* =======================
                     Authenticated User Routes
                    ======================= */}
+                <Route path="/book" element={<BookRoom />} />
+
                 <Route
-                  path="/book"
-                  element={<BookRoom />}
+                  path="/user/dashboard"
+                  element={
+                    <ProtectedRoute role="User">
+                      <UserDashboard />
+                    </ProtectedRoute>
+                  }
+                />
+
+                <Route
+                  path="/admin/dashboard"
+                  element={
+                    <ProtectedRoute role="Admin">
+                      <AdminDashboard />
+                    </ProtectedRoute>
+                  }
                 />
 
                 {/* =======================
@@ -78,10 +100,9 @@ export default function App() {
                 <Route
                   path="/admin/rooms"
                   element={
-                    <RoomList />
-                    // <ProtectedRoute role="Admin">
-                    //   <RoomList />
-                    // </ProtectedRoute>
+                    <ProtectedRoute role="Admin">
+                      <RoomList />
+                    </ProtectedRoute>
                   }
                 />
 
@@ -99,6 +120,33 @@ export default function App() {
                   element={
                     <ProtectedRoute role="Admin">
                       <EditRoom />
+                    </ProtectedRoute>
+                  }
+                />
+
+                <Route
+                  path="/admin/users"
+                  element={
+                    <ProtectedRoute role="Admin">
+                      <UserList />
+                    </ProtectedRoute>
+                  }
+                />
+
+                <Route
+                  path="/admin/users/create"
+                  element={
+                    <ProtectedRoute role="Admin">
+                      <CreateUser />
+                    </ProtectedRoute>
+                  }
+                />
+
+                <Route
+                  path="/admin/bookings"
+                  element={
+                    <ProtectedRoute role="Admin">
+                      <BookingList />
                     </ProtectedRoute>
                   }
                 />

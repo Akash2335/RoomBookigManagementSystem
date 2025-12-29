@@ -10,6 +10,12 @@ export const loginSchema = Yup.object({
     .required("Password is required"),
 });
 
+export const forgotPasswordSchema = Yup.object({
+  email: Yup.string()
+    .email("Invalid email format")
+    .required("Email is required"),
+});
+
 export const roomSchema = Yup.object({
   roomName: Yup.string()
     .min(3, "Room name must be at least 3 characters")
@@ -37,4 +43,22 @@ export const bookingSchema = Yup.object({
     .typeError("Number of people must be a number")
     .min(1, "At least one person required")
     .required("Number of people is required"),
+});
+
+export const userSchema = Yup.object({
+  name: Yup.string()
+    .min(2, "Name must be at least 2 characters")
+    .required("Name is required"),
+
+  email: Yup.string()
+    .email("Invalid email format")
+    .required("Email is required"),
+
+  password: Yup.string()
+    .min(6, "Password must be at least 6 characters")
+    .required("Password is required"),
+
+  role: Yup.string()
+    .oneOf(["User", "Admin"], "Invalid role")
+    .required("Role is required"),
 });
